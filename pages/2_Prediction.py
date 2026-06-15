@@ -1,6 +1,4 @@
-from modules.knn import predict_knn
 from modules.svm import predict_svm
-from modules.decision_tree import predict_dt
 
 import streamlit as st
 import pandas as pd
@@ -80,7 +78,7 @@ if menu == "🏠 Dashboard":
             🧠 Mental Health AI System
         </h1>
         <p style="color:#cbd5e1; font-size:16px;">
-            AI-powered Depression Risk Detection using Machine Learning (KNN, SVM, Decision Tree)
+            AI-powered Depression Risk Detection using Machine Learning SVM
         </p>
     </div>
     """, unsafe_allow_html=True)
@@ -97,8 +95,8 @@ if menu == "🏠 Dashboard":
             border: 1px solid rgba(59,130,246,0.3);
         ">
             <h3>🤖 AI Models</h3>
-            <h2>KNN / SVM / DT</h2>
-            <p style="color:#94a3b8;">3 Machine Learning algorithms</p>
+            <h2>SVM</h2>
+            <p style="color:#94a3b8;">Support Vector Machine Algorithm</p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -174,7 +172,6 @@ elif menu == "📊 Prediction":
     st.title("📊 Prediction System")
 
     input_method = st.radio("Input Method", ["Manual Input", "Upload CSV"], horizontal=True)
-    model_choice = st.radio("Model", ["KNN", "SVM", "Decision Tree"], horizontal=True)
 
     # =========================
     # MANUAL
@@ -217,8 +214,7 @@ elif menu == "📊 Prediction":
                 addiction
             ]
 
-            model = predict_knn if model_choice == "KNN" else predict_svm if model_choice == "SVM" else predict_dt
-            result = model(input_data)
+            result = predict_svm(input_data)
 
             # =========================
             # REASON ENGINE
@@ -291,8 +287,7 @@ elif menu == "📊 Prediction":
                         int(row["addiction_level"])
                     ]
 
-                    model = predict_knn if model_choice == "KNN" else predict_svm if model_choice == "SVM" else predict_dt
-                    pred = model(data)
+                    pred = predict_svm(data)
                     results.append(pred)
 
                     reasons = []
@@ -308,11 +303,9 @@ elif menu == "📊 Prediction":
                     if data[11] >= 7:
                         reasons.append("High addiction")
 
-                    all_reasons.append(", ".join(reasons))
 
                 df["prediction"] = results
                 df["prediction"] = df["prediction"].apply(lambda x: "Depresi" if x == 1 else "Tidak Depresi")
-                df["reason"] = all_reasons
 
                 st.success("Prediction completed 🚀")
                 st.dataframe(df)

@@ -55,9 +55,7 @@ st.markdown("---")
 # =========================
 # DATA MODEL
 # =========================
-knn_acc = 78
 svm_acc = 85
-dt_acc = 80
 
 best_model = "SVM"
 
@@ -66,12 +64,6 @@ best_model = "SVM"
 # =========================
 c1, c2, c3 = st.columns(3)
 
-with c1:
-    st.metric(
-        label="KNN",
-        value=f"{knn_acc}%",
-        delta="- baseline"
-    )
 
 with c2:
     st.metric(
@@ -80,12 +72,6 @@ with c2:
         delta="+ highest accuracy"
     )
 
-with c3:
-    st.metric(
-        label="Decision Tree",
-        value=f"{dt_acc}%",
-        delta="+ interpretable"
-    )
 
 st.markdown("---")
 
@@ -96,8 +82,6 @@ st.markdown("## 🧠 Model Insight")
 
 st.info("""
 - **SVM** memiliki akurasi tertinggi → paling stabil untuk dataset ini  
-- **KNN** cukup baik tetapi sensitif terhadap data baru  
-- **Decision Tree** mudah dijelaskan tetapi kurang akurat dibanding SVM  
 """)
 
 st.markdown("---")
@@ -108,8 +92,8 @@ st.markdown("---")
 st.markdown("## 📊 Accuracy Comparison")
 
 df = pd.DataFrame({
-    "Model": ["KNN", "SVM", "Decision Tree"],
-    "Accuracy": [knn_acc, svm_acc, dt_acc]
+    "Model": ["SVM"],
+    "Accuracy": [svm_acc]
 })
 
 st.bar_chart(df.set_index("Model"))

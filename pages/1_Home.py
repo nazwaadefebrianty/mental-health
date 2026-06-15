@@ -58,8 +58,8 @@ st.markdown("""
 # =========================
 c1, c2, c3, c4 = st.columns(4)
 
-c1.metric("AI Models", "3")
-c2.metric("Algorithms", "KNN • SVM • DT")
+c1.metric("AI Models", "1")
+c2.metric("Algorithms", "SVM")
 c3.metric("Features", "12 Inputs")
 c4.metric("Status", "Active 🟢")
 
@@ -83,9 +83,7 @@ with f1:
 with f2:
     st.info("""
 🧠 Machine Learning
-- KNN Model
 - SVM Model
-- Decision Tree
 """)
 
 with f3:
